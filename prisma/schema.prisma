@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id         String       @id
+  email      String       @unique
+  firstName  String?
+  lastName   String?
+  membership Membership[]
+}
+
+model Organizations {
+  id          String        @id @default(uuid())
+  name        String
+  description String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  boards      Board[]
+  membership  Membership[]
+}
+
+model Board {
+  id             String        @id @default(uuid())
+  title          String
+  organizationId String
+  organization   Organizations @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  cards          Card[]
+}
+
+model Issues {
+  id          String @id @default(uuid())
+  title       String
+  description String?
+  cardId      String
+  card        Card   @relation(fields: [cardId], references: [id], onDelete: Cascade)
+}
+
+model Membership {
+  id             String        @id @default(uuid())
+  userId         String
+  organizationId String
+  role           String
+  organization   Organizations @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Card {
+  id      String   @id @default(uuid())
+  title   String
+  boardId String
+  board   Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  issues  Issues[]
+}
