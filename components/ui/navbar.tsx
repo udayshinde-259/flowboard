@@ -21,8 +21,8 @@ export function Navbar() {
 
   if (isDashboard) {
     return (
-      <div className="m-2 p-2 border-b-2 rounded-sm backdrop-blur-sm">
-        <div className="flex justify-between">
+      <div className="m-4 p-2 border-b-2 rounded-sm shadow-sm bg-white">
+        <div className="flex justify-between items-center">
           <Link
             href="/"
             className="flex items-center gap-2 hover:bg-gray-200 p-2 rounded-sm"
@@ -30,7 +30,7 @@ export function Navbar() {
             <Kanban className="h-4 w-4 sm:h-6 sm:w-6 text-blue-400 cursor-pointer" />
             <span className="font-bold text-xl cursor-pointer">FlowBoard</span>
           </Link>
-          <div className="px-2 mx-2">
+          <div className="px-2 mx-2 ">
             <UserButton />
           </div>
         </div>
@@ -39,7 +39,7 @@ export function Navbar() {
   }
 
   return (
-    <div className="m-2 p-2 border-b-2 rounded-sm">
+    <div className="m-4 p-2 border-b-2 rounded-sm">
       <div className="flex justify-between">
         <div>
           <Link
