@@ -30,9 +30,24 @@ export function Navbar() {
             <Kanban className="h-4 w-4 sm:h-6 sm:w-6 text-blue-400 cursor-pointer" />
             <span className="font-bold text-xl cursor-pointer">FlowBoard</span>
           </Link>
-          <div className="px-2 mx-2 ">
-            <UserButton />
-          </div>
+          {isSignedIn ? (
+            <div className="px-2 mx-2 ">
+              <UserButton />
+            </div>
+          ) : (
+            <div className="flex items-center ">
+              <SignInButton>
+                <Button variant="ghost" className="text-xs sm:text-sm">
+                  Signin
+                </Button>
+              </SignInButton>
+              <SignUpButton>
+                <Button variant="default" className="text-xs sm:text-sm">
+                  Signup
+                </Button>
+              </SignUpButton>
+            </div>
+          )}
         </div>
       </div>
     );

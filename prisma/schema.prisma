@@ -37,15 +37,15 @@ model Board {
   organization   Organizations @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
-  cards          Card[]
+  issues  Issues[]
 }
 
 model Issues {
   id          String @id @default(uuid())
   title       String
   description String?
-  cardId      String
-  card        Card   @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  boardId      String
+  board        Board   @relation(fields: [boardId], references: [id], onDelete: Cascade)
 }
 
 model Membership {
@@ -57,10 +57,3 @@ model Membership {
   user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Card {
-  id      String   @id @default(uuid())
-  title   String
-  boardId String
-  board   Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
-  issues  Issues[]
-}

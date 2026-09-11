@@ -3,6 +3,7 @@ import { verifyWebhook } from "@clerk/nextjs/webhooks";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
+    
     try {
         const evt = await verifyWebhook(req);
         
