@@ -12,6 +12,11 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Role{
+  USER
+  ADMIN
+}
+
 model User {
   id         String       @id
   email      String       @unique
@@ -26,33 +31,33 @@ model Organizations {
   description String?
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
-  boards      Board[]
+  board      Boards[]
   membership  Membership[]
 }
 
-model Board {
+model Boards {
   id             String        @id @default(uuid())
   title          String
   organizationId String
   organization   Organizations @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
-  issues  Issues[]
+  card  Card[]
 }
 
-model Issues {
+model Card {
   id          String @id @default(uuid())
   title       String
   description String?
   boardId      String
-  board        Board   @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  board        Boards   @relation(fields: [boardId], references: [id], onDelete: Cascade)
 }
 
 model Membership {
   id             String        @id @default(uuid())
   userId         String
   organizationId String
-  role           String
+  role           Role          @default(USER)
   organization   Organizations @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

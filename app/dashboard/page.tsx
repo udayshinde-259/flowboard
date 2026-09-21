@@ -52,6 +52,7 @@ export default function Dashboard() {
 }
 
   useEffect(() => {
+
     fetchOrganisations();
   }, []);
 
@@ -83,7 +84,7 @@ export default function Dashboard() {
         </p>
 
         <p className="text-xs text-gray-500 sm:text-sm">
-          Here's all the boards that you can work on.
+          Here's all the organisations that you can work on.
         </p>
       </div>
 
@@ -92,7 +93,7 @@ export default function Dashboard() {
         <div className="flex min-w-0 items-center justify-between rounded-md bg-white p-3 shadow-sm sm:p-4 lg:p-5">
           <div className="flex min-w-0 flex-col">
             <p className="truncate text-xs text-gray-600 sm:text-sm lg:text-base">
-              Total Boards
+              Total Organisations
             </p>
             <p className="text-xl font-bold text-gray-900 sm:text-2xl">
               {organisations.length}
@@ -107,7 +108,7 @@ export default function Dashboard() {
         <div className="flex min-w-0 items-center justify-between rounded-md bg-white p-3 shadow-sm sm:p-4 lg:p-5">
           <div className="flex min-w-0 flex-col">
             <p className="truncate text-xs text-gray-600 sm:text-sm lg:text-base">
-              Active Boards
+              Active Organisations
             </p>
             <p className="text-xl font-bold text-gray-900 sm:text-2xl">
               {organisations.length}
@@ -155,11 +156,11 @@ export default function Dashboard() {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-base font-semibold text-gray-900 sm:text-xl">
-              Your Boards
+              Your Organisations
             </p>
 
             <p className="text-[11px] text-gray-400 sm:text-sm">
-              Manage your Boards and Tasks
+              Manage your Organisations and Tasks
             </p>
           </div>
 
@@ -200,7 +201,7 @@ export default function Dashboard() {
                 }}
               >
                 <Plus />
-                Create Board
+                Create Organisations
               </Button>
             </div>
           </div>
@@ -249,7 +250,7 @@ export default function Dashboard() {
             }}
           >
             <Plus />
-            Create Board
+            Create Organisations
           </Button>
         </div>
       </div>
@@ -259,7 +260,7 @@ export default function Dashboard() {
         <div className="mx-3 mb-6 flex items-center justify-center rounded-md border bg-white py-10 sm:mx-4">
         <div className="flex items-center gap-2 text-sm text-gray-500">
           <Loader2 className="h-6 w-6 animate-spin" />
-            Loading boards...
+            Loading Organisations...
           </div>
         </div>
         ):organisations.length === 0 ? (
@@ -272,7 +273,7 @@ export default function Dashboard() {
           /* Grid View */
           <div className="mx-3 mb-6 grid grid-cols-1 gap-3 sm:mx-4 sm:grid-cols-2 sm:gap-4 lg:gap-5">
             {organisations.map((organisation) => (
-              <Link key={organisation.id} href={`/boards/${organisation.id}`}>
+              <Link key={organisation.id} href={`/organisation/${organisation.id}`}>
                 <Card
                   key={organisation.id}
                   className="mb-3 h-full border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md"
@@ -322,7 +323,7 @@ export default function Dashboard() {
           /* List View */
           <div className="mx-3 mb-6 sm:mx-4">
             {organisations.map((organisation) => (
-              <Link key={organisation.id} href={`/boards/${organisation.id}`}>
+              <Link key={organisation.id} href={`/organsation/${organisation.id}`}>
                 <Card
                   key={organisation.id}
                   className="mb-3 border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:border-blue-300 hover:shadow-md"

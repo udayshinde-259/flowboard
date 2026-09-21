@@ -2,9 +2,7 @@ import {
   getOrganisations,
   postOrganisations,
 } from "@/services/organisations.service";
-import { useUser } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
-import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: Request) {
   const user = await currentUser();
