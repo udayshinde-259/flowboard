@@ -1,23 +1,12 @@
 import { prisma } from "@/lib/generated/prisma";
 
 
-export default async function getBoardsAndCardsByOrganisationId(organisationId: string) {
-    const boards = await prisma.boards.findMany({
-        where:{
-            organizationId: organisationId,
-        },
-        include:{
-            card: true,
-        }
-    })
-    return boards;
-}
-
 export async function createCard(
   boardId: string,
   title: string,
   description?: string,
 ) {
+  // Check if board exists
   const board = await prisma.boards.findUnique({
     where: {
       id: boardId,
@@ -28,11 +17,12 @@ export async function createCard(
     throw new Error("Board not found");
   }
 
+  // Create card
   const card = await prisma.card.create({
     data: {
-      boardId,
       title,
       description: description || null,
+      boardId,
     },
   });
 
